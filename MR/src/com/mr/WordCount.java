@@ -7,8 +7,10 @@ package com.mr;
 
 /**
  *
- * @author NGUYENSINHTU
+ * @author tuns
  */
+
+
 
 import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
@@ -16,7 +18,6 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.Reporter;
 
 
 import org.apache.hadoop.mapreduce.Job;
@@ -25,7 +26,6 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 
 public class WordCount {
@@ -34,7 +34,7 @@ public class WordCount {
     // map phrase
     // input của Map phrase <byteoffset(kiểu long), text>
     // ouput : <key : text, value : 1>
-     public class Map extends Mapper<LongWritable, Text, Text, IntWritable>
+        public static class Map extends Mapper<LongWritable, Text, Text, IntWritable>
     {
         // hadoop cung cấp writable interface để serialize và 
         // de-serialization data được lưu trữ trong HDFS, và input và ouput giữa các mapreduce
@@ -44,11 +44,12 @@ public class WordCount {
         // LongWritable thực chất là keiu623 long là vi trí của dòng trong file
         // mapper context object nhận configuation, job, từ contructor của nó dùng để communicate giữa các map phrase
         // và giữa map phrase và reduce phrase
-        public void map(LongWritable key, Text value, Context output, Reporter reporter)
+        @Override
+        public void map(LongWritable key, Text value, Context output)
                 throws IOException, InterruptedException{
             String line = value.toString();
             
-            String []str = line.split(" ");
+            String []str = line.split("\\s+");
             
             for (int i = 0; i < str.length; ++i){
                 word.set(str[i]);
@@ -61,9 +62,10 @@ public class WordCount {
      // combiner phrase : lấy ouput của map phrase xử lý, ouput là key-value collection
      // reduce phrase
      // intput : key, values collection
-     public class Reduce extends Reducer<Text, IntWritable, Text, IntWritable>{
+     public static class Reduce extends Reducer<Text, IntWritable, Text, IntWritable>{
          
          // context 
+         @Override
          public void reduce (Text key, Iterable<IntWritable> collect, Context context) throws IOException, InterruptedException{
              int sum = 0; // số lần của key xuất hiện trong file
              for (IntWritable v : collect){
@@ -77,7 +79,7 @@ public class WordCount {
      }
      
      
-     public static void main(String args[])throws Exception{
+     public static void main(String []args)throws Exception{
          // job configuation
          
          Configuration conf = new Configuration();
@@ -87,8 +89,8 @@ public class WordCount {
          job.setJarByClass(WordCount.class);
          
          job.setMapperClass(Map.class);
-         job.setReducerClass(Reduce.class);
          job.setCombinerClass(Reduce.class);
+         job.setReducerClass(Reduce.class);
          
          job.setInputFormatClass(TextInputFormat.class);
          
@@ -98,6 +100,6 @@ public class WordCount {
          FileInputFormat.addInputPath(job, new Path(args[1]));
          FileOutputFormat.setOutputPath(job, new Path(args[2]));
          
-         System.exit(job.waitForCompletion(true) ? 0 : 1);
+            System.exit(job.waitForCompletion(true) ? 0 : 1);
      }
 }

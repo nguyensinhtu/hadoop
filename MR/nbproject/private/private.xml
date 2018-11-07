@@ -3,7 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NGUYENSINHTU/Documents/NetBeansProjects/MR/src/com/mr/WordCount.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/com/mr/WordCount.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/Utils/RandomString.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/com/mr/BT6_AvgSalary.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/Utils/CSV.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/com/mr/WeatherData.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/com/mr/BT9_CDRConstants.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/com/mr/BT5_MaxTemp.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/com/mr/BT8_LastFMConstants.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/com/mr/BT7_DeIdentifyData.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/Utils/GenDataset.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/nbproject/build-impl.xml</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/data/CreateData.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/com/mr/Patent.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/com/mr/WordSizeWordCount.java</file>
+            <file>file:/home/tuns/NetBeansProject/hadoop/MR/src/Utils/RanDomDOG.java</file>
         </group>
     </open-files>
 </project-private>
